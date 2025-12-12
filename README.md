@@ -21,6 +21,7 @@
 - numpy
 - opencv-python
 - scikit-learn
+- notebook(Jupyter)
 
 
 ## 2. 프로젝트 구조
@@ -39,7 +40,7 @@ src/
 ├─ server.py                     # Flower 기반 연합학습 서버 코드
 │
 ├─ 서버 로그1.png                # 서버 실행 로그 캡처 이미지
-└─ 서버 로그2.png                # 서버 학습 진행 로그 캡처 이미지
+└─ 서버 로그2.png
 ```
 
 
@@ -48,11 +49,11 @@ src/
 ### 3.1 데이터셋
 - Kvasir-SEG 위장관 용종 분할 데이터셋(약 1000장)
 ### 3.2 폴더 규칙
-- 이미지와 마스크는 파일명이 정확히 일치해야 함
+- `images/`와 `masks/` 내 파일명이 정확히 일치해야 함
 
 
 ## 4. 라이브러리 설치
-`pip install torch torchvision flwr numpy opencv-python scikit-learn`
+`pip install torch torchvision flwr numpy opencv-python scikit-learn notebook`
 
 
 ## 5. 서버 실행 방법
@@ -60,7 +61,7 @@ src/
 ### 5.1 서버 주소 설정
 `server.py` 내부에서 서버 주소 및 포트 확인
 - 기본 포트: `8080`
-- 대기 주소: `0.0.0.0:8000`
+- 대기 주소: `0.0.0.0`
 ### 5.2 서버 실행
 `python server.py`
 ### 5.3 서버 동작 설명
@@ -73,14 +74,19 @@ src/
 ## 6. 클라이언트 실행 방법
 
 ### 6.1 클라이언트 설정
-`client.py`에서 다음 항목 확인
+`Client_code_n.ipynb`에서 다음 항목 확인
 - `CLIENT_ID`
 - `SERVER_ADDRESS`
 - 데이터 경로
 ### 6.2 클라이언트 실행
-`python client.py`
-- 각 클라이언트는 서로 다른 PC 또는 Colab에서 실행 가능
-- 실행 시 서버에 자동 접속
+`jupyter notebook`
+또는
+`jupyter lab`
+브라우저에서 다음 파일을 열어 Run All(모두 실행) 수행
+- Client_code_1.ipynb
+- Client_code_2.ipynb
+- Client_code_3.ipynb
+각 노트북은 하나의 연합학습 클라이언트로 동작하며, 실행 시 서버에 자동 접속속
 
 
 ## 7. 학습 흐름 요약
@@ -94,7 +100,7 @@ src/
 
 
 ## 8. 출력 결과
-- 콘솔 출력
+- 서버 콘솔 출력
   - 라운드 별 Training Loss
   - Validation Dice Score
 - 학습 종료 메시지  
@@ -105,8 +111,9 @@ Training Completed. Server Terminated.
 
 
 ## 9. 종료 방법
-- 자동 종료(설정된 라운드 수 완료 시)
+- 서버: 자동 종료(설정된 라운드 수 완료 시)
 - 수동 종료 시 `ctrl + c`
+- 클라이언트: 노트북 커널 중지 또는 브라우저 종료
 
 
 ## 10. 주의 사항 및 제한점
